@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Arqueo de Cuentas</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: black;
+      margin: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+      color: white;
+    }
+
+    form {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    label {
+      margin-bottom: 5px;
+    }
+
+    table {
+      border-collapse: collapse;
+      width: 80%;
+      max-width: 600px;
+      margin: 20px;
+      background-color: white;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+      border-radius: 8px;
+      overflow: hidden;
+      color: black;
+    }
+
+    th, td {
+      padding: 12px;
+      text-align: left;
+      border-bottom: 1px solid #ddd;
+    }
+
+    th {
+      background-color: #4CAF50;
+      color: white;
+    }
+
+    input {
+      width: 70px;
+      padding: 8px;
+      box-sizing: border-box;
+    }
+
+    .subtotal {
+      font-size: 0.8em;
+      color: #777;
+    }
+
+    #total {
+      font-weight: bold;
+      color: #4CAF50;
+    }
+
+    button {
+      margin-top: 15px;
+      padding: 10px;
+      background-color: #4CAF50;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+  </style>
+</head>
+<body>
+  <form>
+    <label for="denomination_10">Cantidad de billetes de $10:</label>
+    <input type="number" id="denomination_10" oninput="sumarTotal()">
+    
+    <label for="denomination_20">Cantidad de billetes de $20:</label>
+    <input type="number" id="denomination_20" oninput="sumarTotal()">
+    
+    <label for="denomination_50">Cantidad de billetes de $50:</label>
+    <input type="number" id="denomination_50" oninput="sumarTotal()">
+    
+    <label for="denomination_100">Cantidad de billetes de $100:</label>
+    <input type="number" id="denomination_100" oninput="sumarTotal()">
+    
+    <label for="denomination_200">Cantidad de billetes de $200:</label>
+    <input type="number" id="denomination_200" oninput="sumarTotal()">
+    
+    <label for="denomination_500">Cantidad de billetes de $500:</label>
+    <input type="number" id="denomination_500" oninput="sumarTotal()">
+    
+    <label for="denomination_1000">Cantidad de billetes de $1000:</label>
+    <input type="number" id="denomination_1000" oninput="sumarTotal()">
+
+    <button type="button" onclick="limpiarCuentas()">Limpiar Cuentas</button>
+  </form>
+
+  <table>
+    <tr>
+      <th>Denominación</th>
+      <th>Cantidad</th>
+      <th>Subtotal</th>
+    </tr>
+    <tr>
+      <td>10</td>
+      <td><span id="quantity_10">0</span></td>
+      <td id="subtotal_10" class="subtotal">0</td>
+    </tr>
+    <tr>
+      <td>20</td>
+      <td><span id="quantity_20">0</span></td>
+      <td id="subtotal_20" class="subtotal">0</td>
+    </tr>
+    <tr>
+      <td>50</td>
+      <td><span id="quantity_50">0</span></td>
+      <td id="subtotal_50" class="subtotal">0</td>
+    </tr>
+    <tr>
+      <td>100</td>
+      <td><span id="quantity_100">0</span></td>
+      <td id="subtotal_100" class="subtotal">0</td>
+    </tr>
+    <tr>
+      <td>200</td>
+      <td><span id="quantity_200">0</span></td>
+      <td id="subtotal_200" class="subtotal">0</td>
+    </tr>
+    <tr>
+      <td>500</td>
+      <td><span id="quantity_500">0</span></td>
+      <td id="subtotal_500" class="subtotal">0</td>
+    </tr>
+    <tr>
+      <td>1000</td>
+      <td><span id="quantity_1000">0</span></td>
+      <td id="subtotal_1000" class="subtotal">0</td>
+    </tr>
+    <tr>
+      <td>Total:</td>
+      <td></td>
+      <td><span id="total">0</span></td>
+    </tr>
+  </table>
+
+  <script>
+    function sumarTotal() {
+      var cantidad10 = parseInt(document.getElementById('denomination_10').value) || 0;
+      var cantidad20 = parseInt(document.getElementById('denomination_20').value) || 0;
+      var cantidad50 = parseInt(document.getElementById('denomination_50').value) || 0;
+      var cantidad100 = parseInt(document.getElementById('denomination_100').value) || 0;
+      var cantidad200 = parseInt(document.getElementById('denomination_200').value) || 0;
+      var cantidad500 = parseInt(document.getElementById('denomination_500').value) || 0;
+      var cantidad1000 = parseInt(document.getElementById('denomination_1000').value) || 0;
+
+      document.getElementById('quantity_10').innerText = cantidad10;
+      document.getElementById('quantity_20').innerText = cantidad20;
+      document.getElementById('quantity_50').innerText = cantidad50;
+      document.getElementById('quantity_100').innerText = cantidad100;
+      document.getElementById('quantity_200').innerText = cantidad200;
+      document.getElementById('quantity_500').innerText = cantidad500;
+      document.getElementById('quantity_1000').innerText = cantidad1000;
+
+      var subtotal10 = cantidad10 * 10;
+      var subtotal20 = cantidad20 * 20;
+      var subtotal50 = cantidad50 * 50;
+      var subtotal100 = cantidad100 * 100;
+      var subtotal200 = cantidad200 * 200;
+      var subtotal500 = cantidad500 * 500;
+      var subtotal1000 = cantidad1000 * 1000;
+
+      document.getElementById('subtotal_10').innerText = subtotal10;
+      document.getElementById('subtotal_20').innerText = subtotal20;
+      document.getElementById('subtotal_50').innerText = subtotal50;
+      document.getElementById('subtotal_100').innerText = subtotal100;
+      document.getElementById('subtotal_200').innerText = subtotal200;
+      document.getElementById('subtotal_500').innerText = subtotal500;
+      document.getElementById('subtotal_1000').innerText = subtotal1000;
+
+      var total = subtotal10 + subtotal20 + subtotal50 + subtotal100 + subtotal200 + subtotal500 + subtotal1000;
+
+      document.getElementById('total').innerText = total;
+    }
+
+    function limpiarCuentas() {
+      // Limpiar los valores de todos los campos de entrada
+      document.getElementById('denomination_10').value = '';
+      document.getElementById('denomination_20').value = '';
+      document.getElementById('denomination_50').value = '';
+      document.getElementById('denomination_100').value = '';
+      document.getElementById('denomination_200').value = '';
+      document.getElementById('denomination_500').value = '';
+      document.getElementById('denomination_1000').value = '';
+
+      // Reiniciar los valores en la tabla y el total
+      document.getElementById('quantity_10').innerText = '0';
+      document.getElementById('quantity_20').innerText = '0';
+      document.getElementById('quantity_50').innerText = '0';
+      document.getElementById('quantity_100').innerText = '0';
+      document.getElementById('quantity_200').innerText = '0';
+      document.getElementById('quantity_500').innerText = '0';
+      document.getElementById('quantity_1000').innerText = '0';
+
+      document.getElementById('subtotal_10').innerText = '0';
+      document.getElementById('subtotal_20').innerText = '0';
+      document.getElementById('subtotal_50').innerText = '0';
+      document.getElementById('subtotal_100').innerText = '0';
+      document.getElementById('subtotal_200').innerText = '0';
+      document.getElementById('subtotal_500').innerText = '0';
+      document.getElementById('subtotal_1000').innerText = '0';
+
+      document.getElementById('total').innerText = '0';
+    }
+  </script>
+</body>
+</html>
